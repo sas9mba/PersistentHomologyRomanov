@@ -56,6 +56,7 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.textBoxNameObject = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.Visualisers2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -310,6 +311,16 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Название обучаемого объекта";
             // 
+            // Visualisers2
+            // 
+            this.Visualisers2.AutoSize = true;
+            this.Visualisers2.Location = new System.Drawing.Point(225, 128);
+            this.Visualisers2.Name = "Visualisers2";
+            this.Visualisers2.Size = new System.Drawing.Size(107, 17);
+            this.Visualisers2.TabIndex = 13;
+            this.Visualisers2.Text = "Визуализация +";
+            this.Visualisers2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,6 +331,7 @@
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.checkBoxWildViev);
             this.Controls.Add(this.checkBoxVievStep);
+            this.Controls.Add(this.Visualisers2);
             this.Controls.Add(this.Visualisers);
             this.Controls.Add(this.WritenInFile);
             this.Controls.Add(this.Poisk);
@@ -380,6 +392,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.TextBox textBoxNameObject;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox Visualisers2;
     }
 }
 

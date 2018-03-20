@@ -31,7 +31,7 @@ namespace PersistentHomologyRomanov
 
         CvColor[] colorMass = new CvColor[5] { new CvColor(255, 255, 0), new CvColor(0, 255, 0),
              new CvColor(255, 0, 255), new CvColor(0, 255, 255), new CvColor(100, 255, 100) };
-        int minParamLive = 2; //минимальная продолжительность жизни
+        int minParamLive = 0; //минимальная продолжительность жизни
         int countPoint = 0;
         int D = 10; //минимальный диаметр 
         int CountThread = 5;
@@ -1285,13 +1285,15 @@ namespace PersistentHomologyRomanov
                     //ребра
 
                     //chart1.Series.Clear();
+                    if(Visualisers2.Checked)
                     for(int i1 = CountIteration; i1<iv; i1++)
                     {
                         chart1.Series[i1].Enabled = false;
                     }
                     for (int i1 = iv + 1; i1 < edges.Count; i1++)
                     {
-                        chart1.Series[i1].Color = Color.Gray;
+                        if (Visualisers2.Checked)
+                            chart1.Series[i1].Color = Color.Gray;
                         Cv.Line(img, new CvPoint(PointAll[edges[i1].point1].CoordX, PointAll[edges[i1].point1].CoordY), new CvPoint(PointAll[edges[i1].point2].CoordX, PointAll[edges[i1].point2].CoordY), new CvScalar(100, 0, 0, 0));
                         for (int f1 = 0; f1 < massHole.Count; f1++)
                         {
@@ -1303,8 +1305,8 @@ namespace PersistentHomologyRomanov
                                 else
                                     Cv.Line(img, new CvPoint(PointAll[edges[i1].point1].CoordX, PointAll[edges[i1].point1].CoordY), new CvPoint(PointAll[edges[i1].point2].CoordX, PointAll[edges[i1].point2].CoordY), colorMass[4]);
                                 //chart1.Series.Add("Ser" + chart1.Series.Count);
-
-                                chart1.Series[i1].Color = Calci[f1 % 10];
+                                if (Visualisers2.Checked)
+                                    chart1.Series[i1].Color = Calci[f1 % 10];
                                  //CountIteration++;
                             }
                             
@@ -1561,8 +1563,8 @@ namespace PersistentHomologyRomanov
             {
                 OutMass[0][i] = (massHole[i].startedIteration- massHole[0].startedIteration)/liveBaseLine;//относительная точка начала
                 OutMass[1][i] = massHole[i].Live() / liveBaseLine;//относительная длина
-                OutMass[2][i] = 0;//координата x
-                OutMass[3][i] = 0;//координата y
+                OutMass[2][i] = massHole[i].coordX;//координата x
+                OutMass[3][i] = massHole[i].coordY;//координата y
 
             }
 

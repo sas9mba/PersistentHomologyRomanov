@@ -13,21 +13,50 @@ using OpenCvSharp.CPlusPlus;
 namespace PersistentHomologyRomanov
 {
 
-
+    /// <summary>
+    /// класс описывающий точки
+    /// </summary>
     public class PointPH
     {
+        /// <summary>
+        /// имя точки (изначальный порядковый номер)
+        /// </summary>
         public int Name;
+        /// <summary>
+        /// координата Х
+        /// </summary>
         public int CoordX;
+        /// <summary>
+        /// высота (неактивно)
+        /// </summary>
         public int Height;
+        /// <summary>
+        /// Ширина (неактивно)
+        /// </summary>
         public int Width;
+        /// <summary>
+        /// координата У
+        /// </summary>
         public int CoordY;
 
+        /// <summary>
+        /// координата сектора Х (неактивно)
+        /// </summary>
         public int CoordXCell;
+        /// <summary>
+        /// координата ячейки У (Н)
+        /// </summary>
         public int CoordYCell;
 
 
         public List<int>[,] PointUnfamiliar;
+        /// <summary>
+        /// Точки незнакомые для этой позиции
+        /// </summary>
         public List<int> PointNew;
+        /// <summary>
+        /// точки соединенные с этой позицией
+        /// </summary>
         public List<int> PointFriend;
 
         public PointPH (int name, int x, int y )
@@ -47,6 +76,9 @@ namespace PersistentHomologyRomanov
         //    this.PointFriend = new List<int>();
     }
 
+
+
+        #region Функционал не действителен
         public void PaddingAllFriend(List<int> CountPoint)
         {
             PointFriend = new List<int>(CountPoint);
@@ -439,14 +471,30 @@ namespace PersistentHomologyRomanov
             //}
         }
 
+        #endregion
 
 
+
+        /// <summary>
+        /// Появление отслеживание удаление дыр.
+        /// </summary>
+        /// <param name="D">Диаметр измененияя (неактивен)</param>
+        /// <param name="DMin">минимальный Диаметр измененияя (неактивен)</param>
+        /// <param name="Mass">Массив точек</param>
+        /// <param name="massHole">Массив дыр</param>
+        /// <param name="iteration">Номер итерации</param>
+        /// <param name="img">изображение (неактивно)</param>
+        /// <param name="PointCount">Позиция точки 1 в списке</param>
+        /// <param name="point2">позиция точки 2 в списке</param>
+        /// <param name="listEdge">список ребер</param>
+        /// <param name="countEdge">позиция ребра в списке</param>
         public void CheckHole(int D, int DMin, PointPH[] Mass, List<HolPG> massHole, int iteration, IplImage img, int PointCount, int point2, List<EdgePH> listEdge, int countEdge)
         {
 
-            int FalseHole = 1; // если дыра существует менее этого числа, то удаляем
+            int FalseHole = -1; // если дыра существует менее этого числа, то удаляем
             int R = D / 2;
 
+            
             List<int> commonPoint;
             int i = 0;
 
@@ -668,7 +716,7 @@ namespace PersistentHomologyRomanov
 
 
 
-                        massHole.Add(new HolPG(commonPoint, iteration + 1, edges));
+                        massHole.Add(new HolPG(commonPoint, iteration + 1, edges, listEdge[countEdge].GetCentrEdgeX(Mass), listEdge[countEdge].GetCentrEdgeY(Mass)));
                 }
             }
             to_Out:;

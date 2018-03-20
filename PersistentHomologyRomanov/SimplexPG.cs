@@ -7,12 +7,28 @@ using System.Windows.Controls;
 
 namespace PersistentHomologyRomanov
 {
+    /// <summary>
+    /// Компонента связанности
+    /// </summary>
     class SimplexPG
     {
+        /// <summary>
+        /// имя компоненты (порядковый номер)
+        /// </summary>
         public int name;
+        /// <summary>
+        /// Все точки компоненты
+        /// </summary>
         public List<int> allPoint;
+        /// <summary>
+        /// итерация появления
+        /// </summary>
         public int startedIteration;
+        /// <summary>
+        /// Итерация исчезновения
+        /// </summary>
         public int endIteration;
+
         public int shape;
         public int absorption=-1;
 
@@ -28,7 +44,11 @@ namespace PersistentHomologyRomanov
 
         }
 
-        // проверка существования
+        /// <summary>
+        /// Тру если существует на текущей итерации
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public bool TestIn(int i)
         {
             if (i>=startedIteration && i<=endIteration)
@@ -36,14 +56,23 @@ namespace PersistentHomologyRomanov
             return false;
         }
 
-        //Время жизни компоненты
+        /// <summary>
+        /// Возвращает время жизни компоненты
+        /// </summary>
+        /// <returns></returns>
         public int Live()
         {
             return endIteration - startedIteration;
         }
 
 
-        // поиск компонент связанности
+        /// <summary>
+        /// Поиск компонент связанности
+        /// </summary>
+        /// <param name="mass"></param>
+        /// <param name="massSimplex"></param>
+        /// <param name="iteration"></param>
+        /// <param name="Name"></param>
         public void SearchSimplecsForSimplex(PointPH[] mass, List<SimplexPG> massSimplex, int iteration, int Name)
         {
             List<int> newAllPoint = new List<int>();
